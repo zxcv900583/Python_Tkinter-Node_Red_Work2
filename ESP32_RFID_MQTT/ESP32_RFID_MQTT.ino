@@ -1,0 +1,174 @@
+#include <SPI.h>
+#include <MFRC522.h>
+#include <WiFi.h>
+#include <PubSubClient.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// ── 腳位設定 ──────────────────────────────────────────────
+#define SS_PIN   5
+#define RST_PIN  22
+#define LED_PIN  2
+#define I2C_SDA  17
+#define I2C_SCL  16
+
+// ── WiFi & MQTT 設定 ──────────────────────────────────────
+const char* ssid        = "Wokwi-GUEST";
+const char* password    = "";
+const char* mqtt_server = "broker.mqtt-dashboard.com";
+
+const char* TOPIC_RFID_UID    = "alex9ufo/rfid/UID";
+const char* TOPIC_LED_CONTROL = "alex9ufo/led/control";
+const char* TOPIC_LED_STATUS  = "alex9ufo/led/status";
+
+// ── 硬體物件 ─────────────────────────────────────────────
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+MFRC522           mfrc522(SS_PIN, RST_PIN);
+WiFiClient        espClient;
+PubSubClient      mqttClient(espClient);
+
+// ── FreeRTOS Queue ────────────────────────────────────────
+QueueHandle_t rfidQueue;
+struct RfidMsg { char uid[20]; };
+
+// ── 全域旗標 ──────────────────────────────────────────────
+bool isFlashing = false;
+
+// ── MQTT 訊息處理 ─────────────────────────────────────────
+void mqttCallback(char* topic, byte* payload, unsigned int length) {
+    String message = "";
+    for (unsigned int i = 0; i < length; i++) message += (char)payload[i];
+
+    Serial.printf("\n[MQTT CMD]: %s\n", message.c_str());
+
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("MQTT Command:");
+    lcd.setCursor(0, 1);
+    isFlashing = false;
+
+    if (message == "on") {
+        digitalWrite(LED_PIN, HIGH);
+        lcd.print("LED: ON");
+        mqttClient.publish(TOPIC_LED_STATUS, "ON");
+    }
+    else if (message == "off") {
+        digitalWrite(LED_PIN, LOW);
+        lcd.print("LED: OFF");
+        mqttClient.publish(TOPIC_LED_STATUS, "OFF");
+    }
+    else if (message == "flash") {
+        isFlashing = true;
+        lcd.print("MODE: FLASHING");
+        mqttClient.publish(TOPIC_LED_STATUS, "FLASHING");
+    }
+    else if (message == "timer") {
+        digitalWrite(LED_PIN, HIGH);
+        lcd.print("TIMER: 5 SEC");
+        mqttClient.publish(TOPIC_LED_STATUS, "TIMER_START");
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
+        digitalWrite(LED_PIN, LOW);
+        mqttClient.publish(TOPIC_LED_STATUS, "OFF");
+    }
+}
+
+// ── Core 0：WiFi & MQTT 通訊 ──────────────────────────────
+void mqttTask(void* pvParameters) {
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+        vTaskDelay(500 / portTICK_PERIOD_MS);
+    }
+    Serial.println("WiFi connected: " + WiFi.localIP().toString());
+
+    mqttClient.setServer(mqtt_server, 1883);
+    mqttClient.setCallback(mqttCallback);
+
+    RfidMsg rMsg;
+
+    while (true) {
+        if (!mqttClient.connected()) {
+            Serial.print("Connecting to MQTT...");
+            if (mqttClient.connect("ESP32_RFID_Gate_NoTG")) {
+                Serial.println("Connected");
+                mqttClient.subscribe(TOPIC_LED_CONTROL);
+            } else {
+                Serial.printf("Failed, rc=%d. Retry in 5s\n", mqttClient.state());
+                vTaskDelay(5000 / portTICK_PERIOD_MS);
+            }
+        }
+
+        mqttClient.loop();
+
+        // 收到 RFID UID 後發布
+        if (xQueueReceive(rfidQueue, &rMsg, 0) == pdPASS) {
+            mqttClient.publish(TOPIC_RFID_UID, rMsg.uid);
+            Serial.printf("Sent UID to MQTT: %s\n", rMsg.uid);
+        }
+
+        // 閃爍模式
+        if (isFlashing) {
+            digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+            vTaskDelay(300 / portTICK_PERIOD_MS);
+        }
+
+        vTaskDelay(10 / portTICK_PERIOD_MS);
+    }
+}
+
+// ── Core 1：RFID 掃描 ─────────────────────────────────────
+void rfidTask(void* pvParameters) {
+    SPI.begin();
+    mfrc522.PCD_Init();
+    Serial.println("RFID reader ready.");
+
+    RfidMsg rMsg;
+
+    while (true) {
+        if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
+            String uidStr = "";
+            for (byte i = 0; i < mfrc522.uid.size; i++) {
+                if (mfrc522.uid.uidByte[i] < 0x10) uidStr += "0";
+                uidStr += String(mfrc522.uid.uidByte[i], HEX);
+            }
+            uidStr.toUpperCase();
+
+            lcd.clear();
+            lcd.setCursor(0, 0); lcd.print("RFID Detected!");
+            lcd.setCursor(0, 1); lcd.print("ID: " + uidStr);
+            Serial.println("Card UID: " + uidStr);
+
+            uidStr.toCharArray(rMsg.uid, 20);
+            xQueueSend(rfidQueue, &rMsg, portMAX_DELAY);
+
+            mfrc522.PICC_HaltA();
+            mfrc522.PCD_StopCrypto1();
+        }
+
+        vTaskDelay(200 / portTICK_PERIOD_MS);
+    }
+}
+
+// ── Setup ─────────────────────────────────────────────────
+void setup() {
+    Serial.begin(115200);
+    pinMode(LED_PIN, OUTPUT);
+
+    Wire.begin(I2C_SDA, I2C_SCL);
+    lcd.init();
+    lcd.backlight();
+    lcd.print("MQTT Connecting...");
+
+    rfidQueue = xQueueCreate(10, sizeof(RfidMsg));
+
+    if (rfidQueue != NULL) {
+        xTaskCreatePinnedToCore(mqttTask, "MQTT_Task", 8192, NULL, 1, NULL, 0);
+        xTaskCreatePinnedToCore(rfidTask, "RFID_Task", 4096, NULL, 1, NULL, 1);
+    } else {
+        Serial.println("Queue creation failed!");
+    }
+}
+
+// ── Loop（交給 FreeRTOS）─────────────────────────────────
+void loop() {
+    vTaskDelay(portMAX_DELAY);
+}

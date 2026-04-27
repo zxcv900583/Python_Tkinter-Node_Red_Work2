@@ -1,0 +1,26 @@
+# 資料庫（動態產生）
+*.db
+*.db-journal
+
+# 報表（動態產生）
+*.xlsx
+
+# 設定檔（動態產生）
+rfid_config.json
+
+# Node-RED log
+nodered.log
+
+# 第三方工具
+SQLiteDatabaseBrowserPortable/
+
+# IDE / 編輯器
+.vscode/
+.claude/
+
+# 舊版檔案
+nodered_flows_api.json
+
+# Python
+__pycache__/
+*.pyc

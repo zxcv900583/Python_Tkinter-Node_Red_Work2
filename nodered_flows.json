@@ -1,0 +1,1842 @@
+[
+  {
+    "id": "b9efc827e98bf7f9",
+    "type": "mqtt-broker",
+    "name": "broker.mqtt-dashboard.com",
+    "broker": "broker.mqtt-dashboard.com",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": "false",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closeRetain": "false",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": "false",
+    "willPayload": "",
+    "willMsg": {},
+    "userProps": "",
+    "sessionExpiry": ""
+  },
+  {
+    "id": "db_led",
+    "type": "sqlitedb",
+    "db": "D:/MQTT作業2/202603LED.db",
+    "mode": "RWC"
+  },
+  {
+    "id": "db_rfid",
+    "type": "sqlitedb",
+    "db": "D:/MQTT作業2/202603RFID.db",
+    "mode": "RWC"
+  },
+  {
+    "id": "f514574c3ff83395",
+    "type": "ui_tab",
+    "name": "資料管理首頁",
+    "icon": "dashboard",
+    "order": 1,
+    "disabled": false,
+    "hidden": false
+  },
+  {
+    "id": "ui_tab_sub1",
+    "type": "ui_tab",
+    "name": "LED紀錄",
+    "icon": "lightbulb_outline",
+    "order": 2,
+    "disabled": false,
+    "hidden": false
+  },
+  {
+    "id": "ui_tab_sub2",
+    "type": "ui_tab",
+    "name": "刷卡紀錄",
+    "icon": "credit_card",
+    "order": 3,
+    "disabled": false,
+    "hidden": false
+  },
+  {
+    "id": "a7f1622545f7e3c5",
+    "type": "ui_group",
+    "name": "刷卡紀錄與LED控制",
+    "tab": "f514574c3ff83395",
+    "order": 1,
+    "disp": true,
+    "width": "6",
+    "collapse": false,
+    "className": ""
+  },
+  {
+    "id": "grp_s1_ops",
+    "type": "ui_group",
+    "name": "LED 操作",
+    "tab": "ui_tab_sub1",
+    "order": 1,
+    "disp": true,
+    "width": "14",
+    "collapse": false
+  },
+  {
+    "id": "grp_s1_data",
+    "type": "ui_group",
+    "name": "LED 資料",
+    "tab": "ui_tab_sub1",
+    "order": 2,
+    "disp": true,
+    "width": "14",
+    "collapse": false
+  },
+  {
+    "id": "grp_s2_time",
+    "type": "ui_group",
+    "name": "異常時間設定",
+    "tab": "ui_tab_sub2",
+    "order": 1,
+    "disp": true,
+    "width": "14",
+    "collapse": false
+  },
+  {
+    "id": "grp_s2_ops",
+    "type": "ui_group",
+    "name": "RFID 操作",
+    "tab": "ui_tab_sub2",
+    "order": 2,
+    "disp": true,
+    "width": "14",
+    "collapse": false
+  },
+  {
+    "id": "grp_s2_data",
+    "type": "ui_group",
+    "name": "RFID 資料",
+    "tab": "ui_tab_sub2",
+    "order": 3,
+    "disp": true,
+    "width": "14",
+    "collapse": false
+  },
+  {
+    "id": "3897cf2f308c39ee",
+    "type": "tab",
+    "label": "資料管理首頁",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "tab_sub1",
+    "type": "tab",
+    "label": "LED紀錄",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "tab_sub2",
+    "type": "tab",
+    "label": "刷卡紀錄",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "d927438ef7105fcb",
+    "type": "ui_button",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "group": "a7f1622545f7e3c5",
+    "order": 1,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "LED 紀錄",
+    "tooltip": "前往 LED 紀錄頁面",
+    "color": "white",
+    "bgcolor": "#1565C0",
+    "className": "",
+    "icon": "lightbulb_outline",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 140,
+    "y": 60,
+    "wires": [
+      [
+        "fd1d07c6d633f24f"
+      ]
+    ]
+  },
+  {
+    "id": "fd1d07c6d633f24f",
+    "type": "function",
+    "z": "3897cf2f308c39ee",
+    "name": "goto LED紀錄",
+    "func": "msg.payload={\"tab\":\"LED紀錄\"};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 340,
+    "y": 60,
+    "wires": [
+      [
+        "bd19f4282b1404ac"
+      ]
+    ]
+  },
+  {
+    "id": "bd19f4282b1404ac",
+    "type": "ui_ui_control",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "events": "all",
+    "x": 540,
+    "y": 80,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "f9839196994e4e12",
+    "type": "ui_button",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "group": "a7f1622545f7e3c5",
+    "order": 2,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "刷卡紀錄",
+    "tooltip": "前往刷卡紀錄頁面",
+    "color": "white",
+    "bgcolor": "#2E7D32",
+    "className": "",
+    "icon": "credit_card",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 140,
+    "y": 120,
+    "wires": [
+      [
+        "5f2de4fb03923e90"
+      ]
+    ]
+  },
+  {
+    "id": "5f2de4fb03923e90",
+    "type": "function",
+    "z": "3897cf2f308c39ee",
+    "name": "goto 刷卡紀錄",
+    "func": "msg.payload={\"tab\":\"刷卡紀錄\"};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 340,
+    "y": 120,
+    "wires": [
+      [
+        "bd19f4282b1404ac"
+      ]
+    ]
+  },
+  {
+    "id": "e6a04ebb7a023bf4",
+    "type": "ui_button",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "group": "a7f1622545f7e3c5",
+    "order": 4,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "ON",
+    "tooltip": "",
+    "color": "white",
+    "bgcolor": "#43A047",
+    "className": "",
+    "icon": "",
+    "payload": "on",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 110,
+    "y": 220,
+    "wires": [
+      [
+        "fbd45b6c63ee72c2",
+        "32737c9374bb2e01",
+        "38f9ca19329b8265"
+      ]
+    ]
+  },
+  {
+    "id": "ec3ef8fbc2d10ffb",
+    "type": "ui_button",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "group": "a7f1622545f7e3c5",
+    "order": 5,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "OFF",
+    "tooltip": "",
+    "color": "white",
+    "bgcolor": "#E53935",
+    "className": "",
+    "icon": "",
+    "payload": "off",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 110,
+    "y": 260,
+    "wires": [
+      [
+        "fbd45b6c63ee72c2",
+        "32737c9374bb2e01",
+        "38f9ca19329b8265"
+      ]
+    ]
+  },
+  {
+    "id": "470bd8eb959d0c9c",
+    "type": "ui_button",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "group": "a7f1622545f7e3c5",
+    "order": 6,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "TIMER",
+    "tooltip": "",
+    "color": "white",
+    "bgcolor": "#FB8C00",
+    "className": "",
+    "icon": "",
+    "payload": "timer",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 120,
+    "y": 300,
+    "wires": [
+      [
+        "fbd45b6c63ee72c2",
+        "32737c9374bb2e01",
+        "38f9ca19329b8265"
+      ]
+    ]
+  },
+  {
+    "id": "0d2a7c475996f588",
+    "type": "ui_button",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "group": "a7f1622545f7e3c5",
+    "order": 7,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "FLASH",
+    "tooltip": "",
+    "color": "white",
+    "bgcolor": "#8E24AA",
+    "className": "",
+    "icon": "",
+    "payload": "flash",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 120,
+    "y": 340,
+    "wires": [
+      [
+        "fbd45b6c63ee72c2",
+        "32737c9374bb2e01",
+        "38f9ca19329b8265"
+      ]
+    ]
+  },
+  {
+    "id": "fbd45b6c63ee72c2",
+    "type": "ui_audio",
+    "z": "3897cf2f308c39ee",
+    "name": "",
+    "group": "a7f1622545f7e3c5",
+    "voice": "Microsoft Hanhan - Chinese (Traditional, Taiwan)",
+    "always": true,
+    "x": 285,
+    "y": 220,
+    "wires": [],
+    "l": false
+  },
+  {
+    "id": "38f9ca19329b8265",
+    "type": "debug",
+    "z": "3897cf2f308c39ee",
+    "name": "debug",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 330,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "32737c9374bb2e01",
+    "type": "mqtt out",
+    "z": "3897cf2f308c39ee",
+    "name": "LED Control",
+    "topic": "test/led/control",
+    "qos": "1",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "b9efc827e98bf7f9",
+    "x": 350,
+    "y": 300,
+    "wires": []
+  },
+  {
+    "id": "371fba0e98260ca7",
+    "type": "mqtt in",
+    "z": "3897cf2f308c39ee",
+    "name": "RFID in",
+    "topic": "test/rfid/UID",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "b9efc827e98bf7f9",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 110,
+    "y": 440,
+    "wires": [
+      [
+        "b8f297adcdfc7fad",
+        "a7bdb84c9fe6df8c"
+      ]
+    ]
+  },
+  {
+    "id": "b8f297adcdfc7fad",
+    "type": "debug",
+    "z": "3897cf2f308c39ee",
+    "name": "debug",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 250,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "a7bdb84c9fe6df8c",
+    "type": "ui_text",
+    "z": "3897cf2f308c39ee",
+    "group": "a7f1622545f7e3c5",
+    "order": 9,
+    "width": 0,
+    "height": 0,
+    "name": "",
+    "label": "目前 UID卡號",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "className": "",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#000000",
+    "x": 310,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "home_mqtt_led",
+    "type": "mqtt in",
+    "z": "3897cf2f308c39ee",
+    "name": "LED Status in",
+    "topic": "test/led/status",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "b9efc827e98bf7f9",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 110,
+    "y": 520,
+    "wires": [
+      [
+        "home_led_text"
+      ]
+    ]
+  },
+  {
+    "id": "home_led_text",
+    "type": "ui_text",
+    "z": "3897cf2f308c39ee",
+    "group": "a7f1622545f7e3c5",
+    "order": 8,
+    "width": 0,
+    "height": 0,
+    "name": "",
+    "label": "目前LED狀態",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "className": "",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#000000",
+    "x": 310,
+    "y": 520,
+    "wires": []
+  },
+  {
+    "id": "6ac927abd4f5995a",
+    "type": "comment",
+    "z": "3897cf2f308c39ee",
+    "name": "MQTT Topics: test/rfid/UID, test/led/control, test/led/status",
+    "info": "",
+    "x": 300,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "s1_btn_home",
+    "type": "ui_button",
+    "z": "tab_sub1",
+    "group": "grp_s1_ops",
+    "order": 0,
+    "width": 2,
+    "height": 1,
+    "passthru": false,
+    "label": "回主頁",
+    "color": "white",
+    "bgcolor": "#FF6F00",
+    "className": "",
+    "icon": "home",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 100,
+    "y": 40,
+    "wires": [
+      [
+        "s1_fn_home"
+      ]
+    ]
+  },
+  {
+    "id": "s1_fn_home",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "goto 首頁",
+    "func": "msg.payload={\"tab\":\"資料管理首頁\"};\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 280,
+    "y": 40,
+    "wires": [
+      [
+        "s1_ui_ctrl"
+      ]
+    ]
+  },
+  {
+    "id": "s1_ui_ctrl",
+    "type": "ui_ui_control",
+    "z": "tab_sub1",
+    "name": "",
+    "events": "all",
+    "x": 460,
+    "y": 40,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "s1_btn_create",
+    "type": "ui_button",
+    "z": "tab_sub1",
+    "group": "grp_s1_ops",
+    "order": 1,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "建立資料庫",
+    "color": "white",
+    "bgcolor": "#4CAF50",
+    "className": "",
+    "icon": "",
+    "payload": "CREATE TABLE IF NOT EXISTS LED_LOG (id INTEGER PRIMARY KEY AUTOINCREMENT, status TEXT, date TEXT, time TEXT)",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 100,
+    "wires": [
+      [
+        "fn_s1_sql"
+      ]
+    ]
+  },
+  {
+    "id": "s1_btn_select",
+    "type": "ui_button",
+    "z": "tab_sub1",
+    "group": "grp_s1_ops",
+    "order": 2,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "查詢所有資料",
+    "color": "white",
+    "bgcolor": "#2196F3",
+    "className": "",
+    "icon": "",
+    "payload": "SELECT * FROM LED_LOG ORDER BY id DESC",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 160,
+    "wires": [
+      [
+        "fn_s1_sql"
+      ]
+    ]
+  },
+  {
+    "id": "s1_btn_delete",
+    "type": "ui_button",
+    "z": "tab_sub1",
+    "group": "grp_s1_ops",
+    "order": 3,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "清除資料庫內容",
+    "color": "white",
+    "bgcolor": "#FF9800",
+    "className": "",
+    "icon": "",
+    "payload": "是否清除資料庫內容",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 220,
+    "wires": [
+      [
+        "s1_audio_confirm",
+        "s1_toast_del"
+      ]
+    ]
+  },
+  {
+    "id": "s1_audio_confirm",
+    "type": "ui_audio",
+    "z": "tab_sub1",
+    "name": "",
+    "group": "grp_s1_ops",
+    "voice": "Microsoft Hanhan - Chinese (Taiwan)",
+    "always": true,
+    "x": 305,
+    "y": 190,
+    "wires": [],
+    "l": false
+  },
+  {
+    "id": "s1_toast_del",
+    "type": "ui_toast",
+    "z": "tab_sub1",
+    "position": "prompt",
+    "displayTime": "0",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 1,
+    "ok": "YES",
+    "cancel": "NO",
+    "raw": true,
+    "className": "",
+    "topic": "確定要清除 LED 資料庫內容？",
+    "name": "確認清除",
+    "x": 330,
+    "y": 220,
+    "wires": [
+      [
+        "s1_fn_del_ok"
+      ]
+    ]
+  },
+  {
+    "id": "s1_fn_del_ok",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "YES/NO",
+    "func": "var t = String(msg.payload||'');\nif(t === 'Cancel' || t === 'NO'){return [null, msg];}\nreturn [msg, null];",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 510,
+    "y": 220,
+    "wires": [
+      [
+        "s1_fn_del_sql"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "s1_fn_del_sql",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "清除畫面",
+    "func": "return [{payload:[]}, {payload:'LED 畫面資料已清除'}];",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 220,
+    "wires": [
+      [
+        "tmpl_led"
+      ],
+      [
+        "toast_s1"
+      ]
+    ]
+  },
+  {
+    "id": "s1_btn_drop",
+    "type": "ui_button",
+    "z": "tab_sub1",
+    "group": "grp_s1_ops",
+    "order": 4,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "刪除資料庫",
+    "color": "white",
+    "bgcolor": "#F44336",
+    "className": "",
+    "icon": "",
+    "payload": "是否刪除資料庫",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 280,
+    "wires": [
+      [
+        "s1_audio_confirm",
+        "s1_toast_drop"
+      ]
+    ]
+  },
+  {
+    "id": "s1_toast_drop",
+    "type": "ui_toast",
+    "z": "tab_sub1",
+    "position": "prompt",
+    "displayTime": "0",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 1,
+    "ok": "YES",
+    "cancel": "NO",
+    "raw": true,
+    "className": "",
+    "topic": "確定要刪除 LED 資料庫？",
+    "name": "確認刪除",
+    "x": 330,
+    "y": 280,
+    "wires": [
+      [
+        "s1_fn_drop_ok"
+      ]
+    ]
+  },
+  {
+    "id": "s1_fn_drop_ok",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "YES/NO",
+    "func": "var t = String(msg.payload||'');\nif(t === 'Cancel' || t === 'NO'){return [null, msg];}\nreturn [msg, null];",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 510,
+    "y": 280,
+    "wires": [
+      [
+        "s1_fn_drop_sql"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "s1_fn_drop_sql",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "DROP TABLE",
+    "func": "msg.topic='DROP TABLE IF EXISTS LED_LOG';\nmsg.params=[];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 280,
+    "wires": [
+      [
+        "sqlite_led"
+      ]
+    ]
+  },
+  {
+    "id": "s1_btn_export",
+    "type": "ui_button",
+    "z": "tab_sub1",
+    "group": "grp_s1_ops",
+    "order": 5,
+    "width": "12",
+    "height": 1,
+    "passthru": false,
+    "label": "匯出 LED + RFID 報表 (Excel)",
+    "color": "white",
+    "bgcolor": "#7B1FA2",
+    "className": "",
+    "icon": "file_download",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 340,
+    "wires": [
+      [
+        "exec_s1_exp"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s1_sql",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "設定 SQL",
+    "func": "msg.topic = msg.payload;\nmsg.params = [];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 160,
+    "wires": [
+      [
+        "sqlite_led"
+      ]
+    ]
+  },
+  {
+    "id": "s1_sub_status",
+    "type": "mqtt in",
+    "z": "tab_sub1",
+    "name": "LED Status in",
+    "topic": "test/led/status",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "b9efc827e98bf7f9",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 120,
+    "y": 460,
+    "wires": [
+      [
+        "fn_s1_ins"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s1_ins",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "INSERT LED_LOG",
+    "func": "var n=new Date();\nvar d=n.getFullYear()+'/'+(n.getMonth()+1).toString().padStart(2,'0')+'/'+n.getDate().toString().padStart(2,'0');\nvar t=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0')+':'+n.getSeconds().toString().padStart(2,'0');\nvar v=String(msg.payload).replace(/'/g,\"''\");\nmsg.topic=\"INSERT INTO LED_LOG (status, date, time) VALUES ('\" + v + \"', '\" + d + \"', '\" + t + \"')\";\nmsg.params=[];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 350,
+    "y": 460,
+    "wires": [
+      [
+        "sqlite_led"
+      ]
+    ]
+  },
+  {
+    "id": "sqlite_led",
+    "type": "sqlite",
+    "z": "tab_sub1",
+    "mydb": "db_led",
+    "sqlquery": "msg.topic",
+    "sql": "",
+    "name": "SQLite LED",
+    "x": 920,
+    "y": 260,
+    "wires": [
+      [
+        "fn_s1_router"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s1_router",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "路由",
+    "func": "var sql=(msg.topic||'').trim().toUpperCase();\nvar op=sql.split(' ')[0];\nif(Array.isArray(msg.payload)){return [msg,null,null];}\nif(op==='INSERT'){return null;}\nif(op==='DROP'){return [{payload:[]},{payload:'LED 資料表已刪除'},null];}\nvar m={'CREATE':'LED 資料庫建立完成','DELETE':'LED 資料已全部清除'};\nvar txt=m[op]||'操作完成';\nreturn [null,{payload:txt},{payload:txt}];",
+    "outputs": 3,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1100,
+    "y": 260,
+    "wires": [
+      [
+        "tmpl_led"
+      ],
+      [
+        "toast_s1"
+      ],
+      [
+        "s1_link_out"
+      ]
+    ]
+  },
+  {
+    "id": "tmpl_led",
+    "type": "ui_template",
+    "z": "tab_sub1",
+    "group": "grp_s1_data",
+    "name": "LED 資料表",
+    "order": 1,
+    "width": "14",
+    "height": 12,
+    "format": "<div style=\"overflow-x:auto;padding:4px\" ng-init=\"sc='id';sd=true\">\n  <table style=\"width:100%;border-collapse:collapse;font-size:13px;\n                box-shadow:0 1px 4px rgba(0,0,0,.15)\">\n    <thead>\n      <tr style=\"background:#1565C0;color:#fff\">\n        <th ng-click=\"sc='id';sd=!sd\"     style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">ID     <span ng-show=\"sc=='id'\"    >{{sd?'▼':'▲'}}</span></th>\n        <th ng-click=\"sc='status';sd=!sd\" style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">狀態   <span ng-show=\"sc=='status'\">{{sd?'▼':'▲'}}</span></th>\n        <th ng-click=\"sc='date';sd=!sd\"   style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">日期   <span ng-show=\"sc=='date'\"  >{{sd?'▼':'▲'}}</span></th>\n        <th ng-click=\"sc='time';sd=!sd\"   style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">時間   <span ng-show=\"sc=='time'\"  >{{sd?'▼':'▲'}}</span></th>\n      </tr>\n    </thead>\n    <tbody ng-if=\"msg.payload && msg.payload.length > 0\">\n      <tr ng-repeat=\"r in msg.payload | orderBy:sc:sd track by $index\"\n          ng-style=\"{background:\n            r.status && r.status.toUpperCase().indexOf('ON')  !== -1 ? '#E8F5E9' :\n            r.status && r.status.toUpperCase().indexOf('OFF') !== -1 ? '#FFEBEE' :\n            $index%2===0 ? '#fafafa' : '#fff'}\">\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0\">{{r.id}}</td>\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0;font-weight:bold\">{{r.status}}</td>\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0\">{{r.date}}</td>\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0\">{{r.time}}</td>\n      </tr>\n    </tbody>\n    <tbody ng-if=\"!msg.payload || msg.payload.length===0\">\n      <tr><td colspan=\"4\" style=\"text-align:center;padding:30px;color:#bbb;font-size:14px\">（尚無資料）</td></tr>\n    </tbody>\n  </table>\n</div>",
+    "storeOutMessages": true,
+    "fwdInMessages": true,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "x": 1300,
+    "y": 220,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "toast_s1",
+    "type": "ui_toast",
+    "z": "tab_sub1",
+    "position": "top right",
+    "displayTime": "3",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 0,
+    "ok": "OK",
+    "cancel": "",
+    "raw": false,
+    "topic": "LED",
+    "name": "Toast",
+    "x": 1300,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "s1_link_out",
+    "type": "link out",
+    "z": "tab_sub1",
+    "name": "refresh out",
+    "mode": "link",
+    "links": [
+      "s1_link_in"
+    ],
+    "x": 1300,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "s1_link_in",
+    "type": "link in",
+    "z": "tab_sub1",
+    "name": "refresh in",
+    "links": [
+      "s1_link_out"
+    ],
+    "x": 560,
+    "y": 120,
+    "wires": [
+      [
+        "s1_fn_auto_sel"
+      ]
+    ]
+  },
+  {
+    "id": "s1_fn_auto_sel",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "AUTO SELECT",
+    "func": "msg.topic='SELECT * FROM LED_LOG ORDER BY id DESC';\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 720,
+    "y": 120,
+    "wires": [
+      [
+        "sqlite_led"
+      ]
+    ]
+  },
+  {
+    "id": "exec_s1_exp",
+    "type": "exec",
+    "z": "tab_sub1",
+    "command": "python \"D:/MQTT作業2/export_report.py\"",
+    "addpay": false,
+    "append": "",
+    "useSpawn": false,
+    "timer": "",
+    "name": "匯出腳本",
+    "x": 330,
+    "y": 340,
+    "wires": [
+      [
+        "fn_s1_exp_ok"
+      ],
+      [
+        "fn_s1_exp_err"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "fn_s1_exp_ok",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "成功",
+    "func": "msg.payload=String(msg.payload||'').trim();if(!msg.payload)return null;return msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 320,
+    "wires": [
+      [
+        "toast_s1_exp"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s1_exp_err",
+    "type": "function",
+    "z": "tab_sub1",
+    "name": "失敗",
+    "func": "var s=String(msg.payload||'').trim();if(!s)return null;msg.payload='[ERROR] '+s;return msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 360,
+    "wires": [
+      [
+        "toast_s1_exp"
+      ]
+    ]
+  },
+  {
+    "id": "toast_s1_exp",
+    "type": "ui_toast",
+    "z": "tab_sub1",
+    "position": "top right",
+    "displayTime": "5",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 0,
+    "ok": "OK",
+    "cancel": "",
+    "raw": false,
+    "topic": "匯出報表",
+    "name": "匯出 Toast",
+    "x": 730,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "s2_btn_home",
+    "type": "ui_button",
+    "z": "tab_sub2",
+    "group": "grp_s2_ops",
+    "order": 0,
+    "width": 2,
+    "height": 1,
+    "passthru": false,
+    "label": "回主頁",
+    "color": "white",
+    "bgcolor": "#FF6F00",
+    "className": "",
+    "icon": "home",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "x": 100,
+    "y": 40,
+    "wires": [
+      [
+        "s2_fn_home"
+      ]
+    ]
+  },
+  {
+    "id": "s2_fn_home",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "goto 首頁",
+    "func": "msg.payload={\"tab\":\"資料管理首頁\"};\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 280,
+    "y": 40,
+    "wires": [
+      [
+        "s2_ui_ctrl"
+      ]
+    ]
+  },
+  {
+    "id": "s2_ui_ctrl",
+    "type": "ui_ui_control",
+    "z": "tab_sub2",
+    "name": "",
+    "events": "all",
+    "x": 460,
+    "y": 40,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "s2_tmpl_time",
+    "type": "ui_template",
+    "z": "tab_sub2",
+    "group": "grp_s2_time",
+    "name": "設定時間",
+    "order": 1,
+    "width": "14",
+    "height": 2,
+    "format": "<div style=\"padding:10px 4px\">\n  <div style=\"display:flex;align-items:center;gap:10px;font-size:16px;flex-wrap:wrap\">\n    <span style=\"font-weight:bold;color:#333\">異常判定時間：</span>\n    <select ng-model=\"selH\" ng-change=\"update()\"\n            style=\"font-size:16px;padding:5px 8px;border-radius:4px;border:1px solid #bbb;\n                   min-width:65px;text-align:center\">\n      <option ng-repeat=\"h in hours track by $index\" value=\"{{h}}\">{{h < 10 ? '0'+h : h}}</option>\n    </select>\n    <span>時</span>\n    <select ng-model=\"selM\" ng-change=\"update()\"\n            style=\"font-size:16px;padding:5px 8px;border-radius:4px;border:1px solid #bbb;\n                   min-width:65px;text-align:center\">\n      <option ng-repeat=\"m in mins track by $index\" value=\"{{m}}\">{{m < 10 ? '0'+m : m}}</option>\n    </select>\n    <span>分</span>\n    <span ng-if=\"saved\" style=\"color:#4CAF50;font-size:14px;margin-left:8px;font-weight:bold\">已儲存</span>\n  </div>\n  <div style=\"margin-top:8px;color:#999;font-size:12px\">\n    超過此時間刷卡，備註欄將標記「異常」（設為 00:00 則不判定）\n  </div>\n</div>\n<script>\n(function(scope) {\n  scope.hours = [];\n  for (var i = 0; i < 24; i++) scope.hours.push(i);\n  scope.mins = [];\n  for (var i = 0; i < 60; i++) scope.mins.push(i);\n  scope.selH = '0';\n  scope.selM = '0';\n  scope.saved = false;\n  scope.update = function() {\n    scope.send({payload: {hour: parseInt(scope.selH), min: parseInt(scope.selM)}});\n    scope.saved = true;\n    if (scope._st) clearTimeout(scope._st);\n    scope._st = setTimeout(function() {\n      scope.$apply(function() { scope.saved = false; });\n    }, 2000);\n  };\n  scope.$watch('msg', function(msg) {\n    if (msg && msg.payload && msg.payload.hour !== undefined) {\n      scope.selH = String(msg.payload.hour);\n      scope.selM = String(msg.payload.min);\n    }\n  });\n})(scope);\n</script>",
+    "storeOutMessages": false,
+    "fwdInMessages": true,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "x": 300,
+    "y": 680,
+    "wires": [
+      [
+        "s2_fn_save_time"
+      ]
+    ]
+  },
+  {
+    "id": "s2_fn_save_time",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "儲存設定",
+    "func": "flow.set('threshold', msg.payload);\nmsg.payload = JSON.stringify(msg.payload);\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 680,
+    "wires": [
+      [
+        "s2_file_save"
+      ]
+    ]
+  },
+  {
+    "id": "s2_file_save",
+    "type": "file",
+    "z": "tab_sub2",
+    "name": "寫入設定檔",
+    "filename": "D:/MQTT作業2/rfid_config.json",
+    "appendNewline": false,
+    "createDir": false,
+    "overwriteFile": "true",
+    "encoding": "utf8",
+    "x": 700,
+    "y": 680,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "s2_inject_load",
+    "type": "inject",
+    "z": "tab_sub2",
+    "name": "啟動載入",
+    "props": [],
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "1",
+    "topic": "",
+    "x": 120,
+    "y": 740,
+    "wires": [
+      [
+        "s2_file_load"
+      ]
+    ]
+  },
+  {
+    "id": "s2_file_load",
+    "type": "file in",
+    "z": "tab_sub2",
+    "name": "讀取設定檔",
+    "filename": "D:/MQTT作業2/rfid_config.json",
+    "format": "utf8",
+    "chunk": false,
+    "sendError": false,
+    "encoding": "utf8",
+    "allProps": false,
+    "x": 300,
+    "y": 740,
+    "wires": [
+      [
+        "s2_fn_load_time"
+      ]
+    ]
+  },
+  {
+    "id": "s2_fn_load_time",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "載入設定",
+    "func": "try {\n  var cfg = JSON.parse(msg.payload);\n  flow.set('threshold', cfg);\n  return {payload: cfg};\n} catch(e) {\n  flow.set('threshold', {hour:0, min:0});\n  return {payload: {hour:0, min:0}};\n}",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 740,
+    "wires": [
+      [
+        "s2_tmpl_time"
+      ]
+    ]
+  },
+  {
+    "id": "s2_btn_create",
+    "type": "ui_button",
+    "z": "tab_sub2",
+    "group": "grp_s2_ops",
+    "order": 1,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "建立資料庫",
+    "color": "white",
+    "bgcolor": "#4CAF50",
+    "className": "",
+    "icon": "",
+    "payload": "CREATE TABLE IF NOT EXISTS RFID_LOG (id INTEGER PRIMARY KEY AUTOINCREMENT, uid TEXT, date TEXT, time TEXT, remark TEXT DEFAULT '')",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 100,
+    "wires": [
+      [
+        "fn_s2_sql"
+      ]
+    ]
+  },
+  {
+    "id": "s2_btn_select",
+    "type": "ui_button",
+    "z": "tab_sub2",
+    "group": "grp_s2_ops",
+    "order": 2,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "查詢所有資料",
+    "color": "white",
+    "bgcolor": "#2196F3",
+    "className": "",
+    "icon": "",
+    "payload": "SELECT * FROM RFID_LOG ORDER BY id DESC",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 160,
+    "wires": [
+      [
+        "fn_s2_sql"
+      ]
+    ]
+  },
+  {
+    "id": "s2_btn_delete",
+    "type": "ui_button",
+    "z": "tab_sub2",
+    "group": "grp_s2_ops",
+    "order": 3,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "清除資料庫內容",
+    "color": "white",
+    "bgcolor": "#FF9800",
+    "className": "",
+    "icon": "",
+    "payload": "是否清除資料庫內容",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 220,
+    "wires": [
+      [
+        "s2_audio_confirm",
+        "s2_toast_del"
+      ]
+    ]
+  },
+  {
+    "id": "s2_audio_confirm",
+    "type": "ui_audio",
+    "z": "tab_sub2",
+    "name": "",
+    "group": "grp_s2_ops",
+    "voice": "Microsoft Hanhan - Chinese (Taiwan)",
+    "always": true,
+    "x": 305,
+    "y": 190,
+    "wires": [],
+    "l": false
+  },
+  {
+    "id": "s2_toast_del",
+    "type": "ui_toast",
+    "z": "tab_sub2",
+    "position": "prompt",
+    "displayTime": "0",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 1,
+    "ok": "YES",
+    "cancel": "NO",
+    "raw": true,
+    "className": "",
+    "topic": "確定要清除 RFID 資料庫內容？",
+    "name": "確認清除",
+    "x": 330,
+    "y": 220,
+    "wires": [
+      [
+        "s2_fn_del_ok"
+      ]
+    ]
+  },
+  {
+    "id": "s2_fn_del_ok",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "YES/NO",
+    "func": "var t = String(msg.payload||'');\nif(t === 'Cancel' || t === 'NO'){return [null, msg];}\nreturn [msg, null];",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 510,
+    "y": 220,
+    "wires": [
+      [
+        "s2_fn_del_sql"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "s2_fn_del_sql",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "清除畫面",
+    "func": "return [{payload:[]}, {payload:'RFID 畫面資料已清除'}];",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 220,
+    "wires": [
+      [
+        "tmpl_rfid"
+      ],
+      [
+        "toast_s2"
+      ]
+    ]
+  },
+  {
+    "id": "s2_btn_drop",
+    "type": "ui_button",
+    "z": "tab_sub2",
+    "group": "grp_s2_ops",
+    "order": 4,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "label": "刪除資料庫",
+    "color": "white",
+    "bgcolor": "#F44336",
+    "className": "",
+    "icon": "",
+    "payload": "是否刪除資料庫",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 280,
+    "wires": [
+      [
+        "s2_audio_confirm",
+        "s2_toast_drop"
+      ]
+    ]
+  },
+  {
+    "id": "s2_toast_drop",
+    "type": "ui_toast",
+    "z": "tab_sub2",
+    "position": "prompt",
+    "displayTime": "0",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 1,
+    "ok": "YES",
+    "cancel": "NO",
+    "raw": true,
+    "className": "",
+    "topic": "確定要刪除 RFID 資料庫？",
+    "name": "確認刪除",
+    "x": 330,
+    "y": 280,
+    "wires": [
+      [
+        "s2_fn_drop_ok"
+      ]
+    ]
+  },
+  {
+    "id": "s2_fn_drop_ok",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "YES/NO",
+    "func": "var t = String(msg.payload||'');\nif(t === 'Cancel' || t === 'NO'){return [null, msg];}\nreturn [msg, null];",
+    "outputs": 2,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 510,
+    "y": 280,
+    "wires": [
+      [
+        "s2_fn_drop_sql"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "s2_fn_drop_sql",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "DROP TABLE",
+    "func": "msg.topic='DROP TABLE IF EXISTS RFID_LOG';\nmsg.params=[];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 280,
+    "wires": [
+      [
+        "sqlite_rfid"
+      ]
+    ]
+  },
+  {
+    "id": "s2_btn_export",
+    "type": "ui_button",
+    "z": "tab_sub2",
+    "group": "grp_s2_ops",
+    "order": 5,
+    "width": "12",
+    "height": 1,
+    "passthru": false,
+    "label": "匯出 LED + RFID 報表 (Excel)",
+    "color": "white",
+    "bgcolor": "#7B1FA2",
+    "className": "",
+    "icon": "file_download",
+    "payload": "",
+    "payloadType": "str",
+    "topic": "",
+    "topicType": "str",
+    "x": 120,
+    "y": 340,
+    "wires": [
+      [
+        "exec_s2_exp"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s2_sql",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "設定 SQL",
+    "func": "msg.topic = msg.payload;\nmsg.params = [];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 160,
+    "wires": [
+      [
+        "sqlite_rfid"
+      ]
+    ]
+  },
+  {
+    "id": "s2_sub_uid",
+    "type": "mqtt in",
+    "z": "tab_sub2",
+    "name": "RFID UID in",
+    "topic": "test/rfid/UID",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "b9efc827e98bf7f9",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 120,
+    "y": 460,
+    "wires": [
+      [
+        "fn_s2_ins"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s2_ins",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "INSERT RFID_LOG",
+    "func": "var n=new Date();\nvar d=n.getFullYear()+'/'+(n.getMonth()+1).toString().padStart(2,'0')+'/'+n.getDate().toString().padStart(2,'0');\nvar t=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0')+':'+n.getSeconds().toString().padStart(2,'0');\nvar v=String(msg.payload).replace(/'/g,\"''\");\nvar th=flow.get('threshold')||{hour:0,min:0};\nvar curM=n.getHours()*60+n.getMinutes();\nvar thM=th.hour*60+th.min;\nvar remark='';\nif(thM>0 && curM>thM){remark='異常';}\nmsg.topic=\"INSERT INTO RFID_LOG (uid, date, time, remark) VALUES ('\" + v + \"', '\" + d + \"', '\" + t + \"', '\" + remark + \"')\";\nmsg.params=[];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 350,
+    "y": 460,
+    "wires": [
+      [
+        "sqlite_rfid"
+      ]
+    ]
+  },
+  {
+    "id": "sqlite_rfid",
+    "type": "sqlite",
+    "z": "tab_sub2",
+    "mydb": "db_rfid",
+    "sqlquery": "msg.topic",
+    "sql": "",
+    "name": "SQLite RFID",
+    "x": 920,
+    "y": 260,
+    "wires": [
+      [
+        "fn_s2_router"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s2_router",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "路由",
+    "func": "var sql=(msg.topic||'').trim().toUpperCase();\nvar op=sql.split(' ')[0];\nif(Array.isArray(msg.payload)){return [msg,null,null];}\nif(op==='INSERT'){return null;}\nif(op==='DROP'){return [{payload:[]},{payload:'RFID 資料表已刪除'},null];}\nvar m={'CREATE':'RFID 資料庫建立完成','DELETE':'RFID 資料已全部清除'};\nvar txt=m[op]||'操作完成';\nreturn [null,{payload:txt},{payload:txt}];",
+    "outputs": 3,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1100,
+    "y": 260,
+    "wires": [
+      [
+        "tmpl_rfid"
+      ],
+      [
+        "toast_s2"
+      ],
+      [
+        "s2_link_out"
+      ]
+    ]
+  },
+  {
+    "id": "tmpl_rfid",
+    "type": "ui_template",
+    "z": "tab_sub2",
+    "group": "grp_s2_data",
+    "name": "RFID 資料表",
+    "order": 1,
+    "width": "14",
+    "height": 12,
+    "format": "<div style=\"overflow-x:auto;padding:4px\" ng-init=\"sc='id';sd=true\">\n  <table style=\"width:100%;border-collapse:collapse;font-size:13px;\n                box-shadow:0 1px 4px rgba(0,0,0,.15)\">\n    <thead>\n      <tr style=\"background:#2E7D32;color:#fff\">\n        <th ng-click=\"sc='id';sd=!sd\"     style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">ID   <span ng-show=\"sc=='id'\"    >{{sd?'▼':'▲'}}</span></th>\n        <th ng-click=\"sc='uid';sd=!sd\"    style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">UID  <span ng-show=\"sc=='uid'\"   >{{sd?'▼':'▲'}}</span></th>\n        <th ng-click=\"sc='date';sd=!sd\"   style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">日期 <span ng-show=\"sc=='date'\"  >{{sd?'▼':'▲'}}</span></th>\n        <th ng-click=\"sc='time';sd=!sd\"   style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">時間 <span ng-show=\"sc=='time'\"  >{{sd?'▼':'▲'}}</span></th>\n        <th ng-click=\"sc='remark';sd=!sd\" style=\"padding:10px 14px;text-align:center;cursor:pointer;user-select:none;white-space:nowrap\">備註 <span ng-show=\"sc=='remark'\">{{sd?'▼':'▲'}}</span></th>\n      </tr>\n    </thead>\n    <tbody ng-if=\"msg.payload && msg.payload.length > 0\">\n      <tr ng-repeat=\"r in msg.payload | orderBy:sc:sd track by $index\"\n          ng-style=\"{background: r.remark==='異常' ? '#FFF3E0' : ($index%2===0 ? '#fafafa' : '#fff')}\">\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0\">{{r.id}}</td>\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0;font-family:monospace;font-weight:bold\">{{r.uid}}</td>\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0\">{{r.date}}</td>\n        <td style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0\">{{r.time}}</td>\n        <td ng-style=\"{color: r.remark==='異常' ? '#F44336' : '#333', fontWeight: r.remark==='異常' ? 'bold' : 'normal'}\"\n            style=\"padding:8px 14px;text-align:center;border-bottom:1px solid #e0e0e0\">{{r.remark}}</td>\n      </tr>\n    </tbody>\n    <tbody ng-if=\"!msg.payload || msg.payload.length===0\">\n      <tr><td colspan=\"5\" style=\"text-align:center;padding:30px;color:#bbb;font-size:14px\">（尚無資料）</td></tr>\n    </tbody>\n  </table>\n</div>",
+    "storeOutMessages": true,
+    "fwdInMessages": true,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "x": 1300,
+    "y": 220,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "toast_s2",
+    "type": "ui_toast",
+    "z": "tab_sub2",
+    "position": "top right",
+    "displayTime": "3",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 0,
+    "ok": "OK",
+    "cancel": "",
+    "raw": false,
+    "topic": "RFID",
+    "name": "Toast",
+    "x": 1300,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "s2_link_out",
+    "type": "link out",
+    "z": "tab_sub2",
+    "name": "refresh out",
+    "mode": "link",
+    "links": [
+      "s2_link_in"
+    ],
+    "x": 1300,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "s2_link_in",
+    "type": "link in",
+    "z": "tab_sub2",
+    "name": "refresh in",
+    "links": [
+      "s2_link_out"
+    ],
+    "x": 560,
+    "y": 120,
+    "wires": [
+      [
+        "s2_fn_auto_sel"
+      ]
+    ]
+  },
+  {
+    "id": "s2_fn_auto_sel",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "AUTO SELECT",
+    "func": "msg.topic='SELECT * FROM RFID_LOG ORDER BY id DESC';\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 720,
+    "y": 120,
+    "wires": [
+      [
+        "sqlite_rfid"
+      ]
+    ]
+  },
+  {
+    "id": "exec_s2_exp",
+    "type": "exec",
+    "z": "tab_sub2",
+    "command": "python \"D:/MQTT作業2/export_report.py\"",
+    "addpay": false,
+    "append": "",
+    "useSpawn": false,
+    "timer": "",
+    "name": "匯出腳本",
+    "x": 330,
+    "y": 340,
+    "wires": [
+      [
+        "fn_s2_exp_ok"
+      ],
+      [
+        "fn_s2_exp_err"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "fn_s2_exp_ok",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "成功",
+    "func": "msg.payload=String(msg.payload||'').trim();if(!msg.payload)return null;return msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 320,
+    "wires": [
+      [
+        "toast_s2_exp"
+      ]
+    ]
+  },
+  {
+    "id": "fn_s2_exp_err",
+    "type": "function",
+    "z": "tab_sub2",
+    "name": "失敗",
+    "func": "var s=String(msg.payload||'').trim();if(!s)return null;msg.payload='[ERROR] '+s;return msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 360,
+    "wires": [
+      [
+        "toast_s2_exp"
+      ]
+    ]
+  },
+  {
+    "id": "toast_s2_exp",
+    "type": "ui_toast",
+    "z": "tab_sub2",
+    "position": "top right",
+    "displayTime": "5",
+    "highlight": "",
+    "sendall": true,
+    "outputs": 0,
+    "ok": "OK",
+    "cancel": "",
+    "raw": false,
+    "topic": "匯出報表",
+    "name": "匯出 Toast",
+    "x": 730,
+    "y": 340,
+    "wires": []
+  }
+]
